@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SnakeGameBackend2.props" />
+</Project>
