@@ -3,44 +3,36 @@
 <head>
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
-    <title>Snake NICEEE</title>
+    <title>Snake Game</title>
 </head>
 <body>
 <div id="overlay">
     <div id="menu">
-        <form id="playerForm">
-            <label for="player1">Player 1 (White Snake):</label>
-            <input type="text" id="player1" name="player1"><br>
-            <label for="player2">Player 2 (Blue Snake):</label>
-            <input type="text" id="player2" name="player2"><br>
-            <button type="button" onclick="startGame()">Start Game</button>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <button type="button" onclick="login()">Login</button>
+            <button type="button" onclick="showRegister()">Register</button>
+        </form>
+        <form id="registerForm" style="display: none;">
+            <label for="registerUsername">Username:</label>
+            <input type="text" id="registerUsername" name="username"><br>
+            <label for="registerPassword">Password:</label>
+            <input type="password" id="registerPassword" name="password"><br>
+            <button type="button" onclick="register()">Register</button>
+            <button type="button" onclick="showLogin()">Back to Login</button>
         </form>
     </div>
 </div>
-<h1 style="color: white" id="ScoreCSS">Score: <a id="Score">Player 1: 0, Player 2: 0</a></h1>
-<h1 style="color: white">Highscore: <a id="Highscore">0</a></h1>
+<h1 style="color: white" id="ScoreCSS"><a id="Score">Player 1: 0</a></h1>
 
 <canvas id="game" width="400" height="400"></canvas>
 
 <div id="leaderboard-container">
     <h2>Leaderboard</h2>
-    <div id="leaderboard">
-        <div class="row">
-            <div class="name">Player1</div><div class="score">430</div>
-        </div>
-        <div class="row">
-            <div class="name">Player2</div><div class="score">580</div>
-        </div>
-        <div class="row">
-            <div class="name">Player3</div><div class="score">310</div>
-        </div>
-        <div class="row">
-            <div class="name">Player4</div><div class="score">640</div>
-        </div>
-        <div class="row">
-            <div class="name">Player5</div><div class="score">495</div>
-        </div>
-    </div>
+    <div id="leaderboard"></div>
 </div>
 <script src="script.js"></script>
 </body>

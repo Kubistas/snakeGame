@@ -13,31 +13,40 @@ namespace SnakeGameBackend2
     {
         public IConfiguration Configuration { get; }
 
+        public static string? ConnectionString { get; private set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectionString = Configuration.GetConnectionString("DefaultConnection");
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AuthContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<LeaderboardContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers();
+
             services.AddApiVersioning(o =>
             {
                 o.ReportApiVersions = true;
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new ApiVersion(1, 0);
             });
-            services.AddCors(options =>
+
+            /*services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.WithOrigins("http://localhost:63344") // Update this line as needed
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                        .WithOrigins("https://localhost:63342") // Add your frontend URL here
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+                        .AllowAnyMethod()
+                        .AllowCredentials());
+            });*/
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,16 +56,24 @@ namespace SnakeGameBackend2
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(); // Ensure this is before UseRouting and UseEndpoints
+            app.UseHttpsRedirection();
+
+            //app.UseCors("AllowSpecificOrigin"); // Ensure this is placed before UseRouting()
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public static string? GetConnectionString()
+        {
+            return ConnectionString;
         }
     }
 }
