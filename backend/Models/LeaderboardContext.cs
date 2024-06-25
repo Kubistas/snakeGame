@@ -5,9 +5,7 @@ namespace SnakeGameBackend2.Models
 {
     public class LeaderboardContext : DbContext
     {
-        public LeaderboardContext(DbContextOptions<LeaderboardContext> options) : base(options)
-        {
-        }
+        public LeaderboardContext(DbContextOptions<LeaderboardContext> options) : base(options) { }
 
         public DbSet<LeaderboardEntry> LeaderboardEntries { get; set; }
     }

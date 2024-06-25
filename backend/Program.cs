@@ -12,15 +12,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LeaderboardContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure CORS to allow requests from your frontend
+builder.Services.AddDbContext<AuthContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.WithOrigins("http://localhost:63344") // Update this to your frontend URL
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins(new string[]{"https://localhost:63342", "http://localhost:63342"}) // Add your frontend URL here
             .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
+            .AllowAnyMethod()
+            .AllowCredentials());
 });
 
 var app = builder.Build();
@@ -29,7 +32,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => 
+    app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "SnakeGameBackend2 API v1");
         c.RoutePrefix = "api/v1/leaderboard/swagger";
@@ -38,7 +41,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(); // Enable CORS
+app.UseCors("AllowSpecificOrigin"); // Ensure this is placed before UseRouting()
+
+app.UseRouting();
 
 app.UseAuthorization();
 
