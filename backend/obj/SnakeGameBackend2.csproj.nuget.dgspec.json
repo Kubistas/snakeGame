@@ -1,25 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jakub Šnajdr\\RiderProjects\\SnakeGameBackend2\\SnakeGameBackend2\\SnakeGameBackend2.csproj": {}
+    "C:\\Projects\\snakeGame\\backend\\SnakeGameBackend2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jakub Šnajdr\\RiderProjects\\SnakeGameBackend2\\SnakeGameBackend2\\SnakeGameBackend2.csproj": {
+    "C:\\Projects\\snakeGame\\backend\\SnakeGameBackend2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jakub Šnajdr\\RiderProjects\\SnakeGameBackend2\\SnakeGameBackend2\\SnakeGameBackend2.csproj",
+        "projectUniqueName": "C:\\Projects\\snakeGame\\backend\\SnakeGameBackend2.csproj",
         "projectName": "SnakeGameBackend2",
-        "projectPath": "C:\\Users\\Jakub Šnajdr\\RiderProjects\\SnakeGameBackend2\\SnakeGameBackend2\\SnakeGameBackend2.csproj",
-        "packagesPath": "C:\\Users\\Jakub Šnajdr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jakub Šnajdr\\RiderProjects\\SnakeGameBackend2\\SnakeGameBackend2\\obj\\",
+        "projectPath": "C:\\Projects\\snakeGame\\backend\\SnakeGameBackend2.csproj",
+        "packagesPath": "C:\\Users\\adm.majer\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\snakeGame\\backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Jakub Šnajdr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\adm.majer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -89,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

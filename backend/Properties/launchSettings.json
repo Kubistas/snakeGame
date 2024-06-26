@@ -8,6 +8,7 @@
       "sslPort": 44385
     }
   },
+  // TODO: Bolo by dobré mať menej profilov. Jeden max 2 ktoré chceš použivať a tie zadefinovať
   "profiles": {
     "http": {
       "commandName": "Project",
@@ -23,6 +24,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
+      // TODO: Tu by sa hodilo zmeniť launchUrl: https://localhost:5255/api/v1/leaderboard/swagger aby sa ti to púštalo defaultne
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7154;http://localhost:5255",
       "environmentVariables": {
