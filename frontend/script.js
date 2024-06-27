@@ -8,6 +8,7 @@ let player1Score = 0;
 let player1Name = 'Player 1';
 
 let Speed;
+let animationFrameId;
 
 const snake = {
     x: 200,
@@ -46,9 +47,12 @@ function startGame() {
 }
 
 function initializeGame() {
-    Speed = 20;
+    Speed = 10;
     activateSnakes(1);
-    requestAnimationFrame(loop);
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+    animationFrameId = requestAnimationFrame(loop);
 }
 
 document.addEventListener('keydown', function(e) {
@@ -65,7 +69,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 function loop() {
-    requestAnimationFrame(loop);
+    animationFrameId = requestAnimationFrame(loop);
 
     if (++count < Speed) {
         return;
@@ -229,10 +233,11 @@ function login() {
                 response.json().then(() => {
                     player1Name = username;
                     startGame();
+                    document.getElementById('leaderboard-container').classList.add('visible');
                 });
             } else {
                 console.log('Login failed with status:', response.status, response.statusText);
-                alert('Login failed');
+                document.getElementById('loginMessage').textContent = 'Wrong username or password';
             }
         })
         .catch(error => {
@@ -255,10 +260,13 @@ function register() {
             if (response.ok) {
                 response.json().then(data => {
                     console.log(data.message);
+                    document.getElementById('registerMessage').textContent = 'Registration successful';
+                    showLogin();
                 });
             } else {
                 response.json().then(error => {
                     console.log('Registration failed: ' + error.message);
+                    document.getElementById('registerMessage').textContent = 'Registration failed: ' + error.message;
                 });
             }
         })
@@ -283,4 +291,22 @@ function activateSnakes(numberOfSnakes) {
     }
 }
 
-requestAnimationFrame(loop);
+function restartGame() {
+    // Reset game state
+    player1Score = 0;
+    document.getElementById("Score").innerHTML = `${player1Name}: ${player1Score}`;
+    snake.cells = [];
+    snake.maxCells = 4;
+    snake.x = 200;
+    snake.y = 200;
+    snake.dx = grid;
+    snake.dy = 0;
+    apple.x = getRandomInt(0, 40) * grid;
+    apple.y = getRandomInt(0, 40) * grid;
+
+    // Start a new game
+    startGame();
+}
+
+// Initial start
+animationFrameId = requestAnimationFrame(loop);
