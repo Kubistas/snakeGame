@@ -1,12 +1,18 @@
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
+    background-color: #151515;
+    color: #EEEEEE;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     position: relative;
     overflow: hidden;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    max-width: 100vw;
 }
 
 #overlay {
@@ -15,72 +21,83 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 #menu {
-    width: 80%;
+    width: 100%;
     max-width: 400px;
     padding: 20px;
-    background-color: rgba(51, 51, 51, 0.8);
-    color: #fff;
+    background-color: rgba(169, 29, 58, 0.9);
+    color: #EEEEEE;
     border-radius: 10px;
     box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-#playerForm, #loginForm, #registerForm {
+form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-#playerForm input, #playerForm button, #loginForm input, #loginForm button, #registerForm input, #registerForm button {
-    padding: 10px;
+input, button {
+    padding: 12px;
     border: none;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1em;
 }
 
-#playerForm button, #loginForm button, #registerForm button {
-    background-color: #009900;
-    color: #fff;
+button {
+    background-color: #A91D3A;
+    color: #EEEEEE;
     cursor: pointer;
 }
 
-#game {
-    margin: 20px auto;
-    border: 1px solid #fff;
-    max-width: 90vw;
-    height: auto;
+button:hover {
+    background-color: #C73659;
 }
 
-#ScoreCSS {
-    color: #fff;
-    margin: 10px 0;
-    font-size: 1.5em;
+input {
+    background-color: #C73659;
+    color: #151515;
 }
 
-#leaderboard-container {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 90%;
-    max-width: 300px;
-    background-color: rgba(51, 51, 51, 0.8);
-    padding: 20px;
+#registerForm {
+    background-color: #830324;
+    border: 2px solid #830324;
+    padding: 15px;
     border-radius: 10px;
-    box-sizing: border-box;
+}
+
+#loginForm {
+    background-color: rgba(169, 29, 58, 0.8);
+    border: 2px solid #A91D3A;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+
+
+
+#leaderboard-container.visible {
+    transform: translateX(0);
+    opacity: 1;
 }
 
 #leaderboard h2 {
     font-size: 1.5em;
-    color: #ffd700;
-    border-bottom: 2px solid #ffd700;
+    color: #C73659;
+    border-bottom: 2px solid #C73659;
     padding: 0 0 10px;
     margin: 0 0 20px;
 }
@@ -90,7 +107,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid #AFAFAF;
+    border-bottom: 1px solid #EEEEEE;
 }
 
 .name, .score {
@@ -105,4 +122,104 @@ body {
 .score {
     flex: 1;
     text-align: right;
+}
+
+#ScoreCSS {
+    color: #EEEEEE;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 90vw;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#game {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #EEEEEE;
+    animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#loginMessage, #registerMessage {
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#restart-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: gold;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: bounceIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (min-width: 900px) {
+    #leaderboard-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 300px;
+        background-color: rgba(169, 29, 58, 0.9);
+        padding: 20px;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        transition: transform 1s ease, opacity 1s ease;
+        transform: translateX(-100%);
+        opacity: 0;
+        z-index: 1;
+    }
 }

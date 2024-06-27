@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link href="styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Snake Game</title>
 </head>
@@ -10,30 +10,39 @@
     <div id="menu">
         <form id="loginForm">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br>
+            <input id="username" name="username" type="text"><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password"><br>
-            <button type="button" onclick="login()">Login</button>
-            <button type="button" onclick="showRegister()">Register</button>
+            <input id="password" name="password" type="password"><br>
+            <button onclick="login()" type="button">Login</button>
+            <button onclick="showRegister()" type="button">Register</button>
+            <div id="loginMessage"></div>
         </form>
         <form id="registerForm" style="display: none;">
             <label for="registerUsername">Username:</label>
-            <input type="text" id="registerUsername" name="username"><br>
+            <input id="registerUsername" name="username" type="text"><br>
             <label for="registerPassword">Password:</label>
-            <input type="password" id="registerPassword" name="password"><br>
-            <button type="button" onclick="register()">Register</button>
-            <button type="button" onclick="showLogin()">Back to Login</button>
+            <input id="registerPassword" name="password" type="password"><br>
+            <button onclick="register()" type="button">Register</button>
+            <button onclick="showLogin()" type="button">Back to Login</button>
+            <div id="registerMessage"></div>
         </form>
     </div>
 </div>
-<h1 style="color: white" id="ScoreCSS"><a id="Score">Player 1: 0</a></h1>
 
-<canvas id="game" width="400" height="400"></canvas>
+<div id="main-container">
+    <div id="leaderboard-container">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard"></div>
+    </div>
 
-<div id="leaderboard-container">
-    <h2>Leaderboard</h2>
-    <div id="leaderboard"></div>
+    <button id="restartButton" onclick="restartGame()" type="button">Restart Game</button>
+
+    <div id="game-container">
+        <h1 id="ScoreCSS"><a id="Score">Player 1: 0</a></h1>
+        <canvas height="400" id="game" width="400"></canvas>
+    </div>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
